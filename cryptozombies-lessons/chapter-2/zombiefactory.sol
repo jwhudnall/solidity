@@ -23,8 +23,12 @@ contract ZombieFactory {
     // Create a private function with two parameters
     function _createZombie(string memory _name, uint _dna) private {
         // Create zombie id that equals the index of the array after Zombie is added
-        // fire event
         uint id = zombies.push(Zombie(_name, _dna)) - 1;
+
+        // update owner mapping and increment zombie count
+        zombieToOwner[id] = msg.sender;
+        ownerZombieCount[msg.sender]++;
+        // fire event
         emit NewZombie(id, _name, _dna);
     }
 
