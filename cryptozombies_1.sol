@@ -19,6 +19,8 @@ contract ZombieFactory {
 
     // Private, view function
     function _generateRandomDna(string memory _str) private view returns (uint) {
-        
+        // Generate pseudo-random hex of _str as 16-digit uint
+        uint rand = uint(keccak256(abi.encodePacked(_str)));
+        return rand % dnaModulus;
     }
 }   
