@@ -11,9 +11,14 @@ contract ZombieFactory {
     // Create a public array of Zombie structs
     Zombie[] public zombies;
 
-    // Create a public function with two parameters
-    function createZombie(string memory _name, uint _dna) public {
+    // Create a private function with two parameters
+    function _createZombie(string memory _name, uint _dna) private {
         // Create Zombie and add to zombie array
         zombies.push(Zombie(_name, _dna));
+    }
+
+    // Private, view function
+    function _generateRandomDna(string memory _str) private view returns (uint) {
+        
     }
 }   
