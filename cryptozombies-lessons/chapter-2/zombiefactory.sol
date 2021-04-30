@@ -1,4 +1,4 @@
-pragma solidity >=0.5.0;
+pragma solidity >=0.5.0 <;
 
 contract ZombieFactory {
 
@@ -21,7 +21,7 @@ contract ZombieFactory {
 
 
     // Create a private function with two parameters
-    function _createZombie(string memory _name, uint _dna) private {
+    function _createZombie(string memory _name, uint _dna) internal {
         // Create zombie id that equals the index of the array after Zombie is added
         uint id = zombies.push(Zombie(_name, _dna)) - 1;
 
