@@ -18,6 +18,11 @@ contract KittyInterface {
 );
 
 contract ZombieFeeding is ZombieFactory {
+
+  address ckAddress = 0x06012c8cf97BEaD5deAe237070F9587f8E7A266d;
+  // Initialize kittyContract here using `ckAddress` from above
+  KittyInterface kittyContract = KittyInterface(ckAddress);
+  
     // Create Public function
   // check zombie ownership
   // Create local variable
