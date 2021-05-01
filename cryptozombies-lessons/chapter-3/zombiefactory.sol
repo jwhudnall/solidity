@@ -1,6 +1,8 @@
-pragma solidity >=0.5.0 <;
+pragma solidity >=0.5.0 <0.8.5;
 
-contract ZombieFactory {
+import "./ownable.sol";
+
+contract ZombieFactory is Ownable{
 
     // declare event to communicate to front-end
     event NewZombie(uint zombieId, string name, uint dna);
