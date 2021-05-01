@@ -26,7 +26,7 @@ contract ZombieFeeding is ZombieFactory {
     // Create Public function
   // check zombie ownership
   // Create local variable
-  function feedAndMultiply(uint _zombieId, uint _targetDna) public {
+  function feedAndMultiply(uint _zombieId, uint _targetDna, string memory _species) public {
       require(msg.sender == zombieToOwner[msg.sender]);
       Zombie storage myZombie = zombies[_zombieId];
 
@@ -34,12 +34,16 @@ contract ZombieFeeding is ZombieFactory {
     // Create a zombie whose DNA is the avg of the two
     _targetDna = _targetDna % dnaModulus;
     uint newDna = (myZombie.dna + _targetDna) / 2;
+    // Changes last 2 digits of zombie DNA to '99' if _species is 'kitty'
+    if (keccak256(abi.encodePacked(_species)) == keccak256(abi.encodePacked("kitty")))) {
+      newDna = newDna - newDna % 100 + 99;     
+    }
     _createZombie("NoName", newDna);
   }
   // define function to retrieve kitty genes from contract
   function feedOnKitty(uint _zombieId, uint _kittyId) public {
     uint kittyDna;
     (,,,,,,,,,kittyDna) = kittyContract.getKitty(_kittyId);
-    feedAndMultiply(_zombieId, kittyDna);
+    feedAndMultiply(_zombieId, kittyDna, "kitty");
   }
 }
