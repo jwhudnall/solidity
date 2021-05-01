@@ -22,7 +22,7 @@ contract ZombieFeeding is ZombieFactory {
   address ckAddress = 0x06012c8cf97BEaD5deAe237070F9587f8E7A266d;
   // Initialize kittyContract here using `ckAddress` from above
   KittyInterface kittyContract = KittyInterface(ckAddress);
-  
+
     // Create Public function
   // check zombie ownership
   // Create local variable
@@ -36,5 +36,10 @@ contract ZombieFeeding is ZombieFactory {
     uint newDna = (myZombie.dna + _targetDna) / 2;
     _createZombie("NoName", newDna);
   }
+  // define function to retrieve kitty genes from contract
+  function feedOnKitty(uint _zombieId, uint _kittyId) public {
+    uint kittyDna;
+    (,,,,,,,,,kittyDna) = kittyContract.getKitty(_kittyId);
+    feedAndMultiply(_zombieId, kittyDna);
   }
 }
