@@ -16,6 +16,8 @@ contract ZombieFactory is Ownable{
         uint dna;
         uint32 level;
         uint32 readyTime;
+        uint16 winCount;
+        uint16 lossCount;
     }
     // Create a public array of Zombie structs
     Zombie[] public zombies;
@@ -28,7 +30,7 @@ contract ZombieFactory is Ownable{
     // Create a private function with two parameters
     function _createZombie(string memory _name, uint _dna) internal {
         // Create zombie id that equals the index of the array after Zombie is added
-        uint id = zombies.push(Zombie(_name, _dna, 1, uint32(now + cooldownTime))) - 1;
+        uint id = zombies.push(Zombie(_name, _dna, 1, uint32(now + cooldownTime), 0, 0)) - 1;
 
         // update owner mapping and increment zombie count
         zombieToOwner[id] = msg.sender;
