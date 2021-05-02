@@ -5,10 +5,21 @@ import "./zombiefeeding.sol";
 contract ZombieHelper is ZombieFeeding {
     // Define levelUpFee
     uint256 levelUpFee = 0.001 ether;
-    
+
     modifier aboveLevel(uint256 _level, uint256 _zombieId) {
         require(zombies[_zombieId].level >= _level);
         _;
+    }
+
+    // Create withdraw function
+    function withdraw() external onlyOwner {
+        address payable _owner = address(uint160(owner()));
+        _owner.transfer(address(this).balance);
+    }
+
+    // Owner can modify the levelUpFee
+    function setLevelUpFee(uint256 _fee) external onlyOwner {
+        levelUpFee = _fee;
     }
 
     // If proper fee is present, level up zombie
