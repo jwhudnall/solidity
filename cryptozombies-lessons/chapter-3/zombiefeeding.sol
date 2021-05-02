@@ -25,6 +25,17 @@ contract ZombieFeeding is ZombieFactory {
   function setKittyContractAddress(address _address) external onlyOwner {
     kittyContract = KittyInterface(_address);
   }
+
+  // Define trigger cooldown function
+  function _triggerCooldown(Zombie storage _zombie) internal {
+    _zombie.readyTime = uint32(now + cooldownTime);
+  }
+
+  // Define helper function to determine if Zombie is eligible for an action
+  function _isReady(Zombie storage _zombie) internal view returns(bool) {
+    return (_zombie.readyTime <= now);
+  }
+
     // Create Public function
   // check zombie ownership
   // Create local variable
