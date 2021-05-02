@@ -3,10 +3,17 @@ pragma solidity >=0.5.0 <0.8.5;
 import "./zombiehelper.sol";
 
 contract ZombieAttack is ZombieHelper {
+    uint256 randNonce = 0;
+    uint256 attackVictoryProbability = 70;
+
     // Incorporate "random" number function
-  uint randNonce = 0;
-  function randMod(uint _modulus) internal returns(uint) {
-    randNonce++;
-    return uint(keccak256(abi.encodePacked(now,msg.sender,randNonce))) % _modulus;
-  }
+    function randMod(uint256 _modulus) internal returns (uint256) {
+        randNonce++;
+        return
+            uint256(keccak256(abi.encodePacked(now, msg.sender, randNonce))) %
+            _modulus;
+    }
+
+    // Attack function
+    function attack(uint256 _zombieId, uint256 _targetId) external {}
 }
